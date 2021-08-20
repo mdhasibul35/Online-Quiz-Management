@@ -317,27 +317,43 @@ if (!(isset($_SESSION['email']))) {
                     ?>
                     <?php
                     if (@$_GET['q'] == 6) {
+
                         echo $email;
-                        $con=mysqli_connect("localhost","root","","xm2");
-                        $q=mysqli_query($con,"SELECT * FROM history" )or die('Error197');
-                        echo  '<div class="panel title">
-                        <table class="table table-striped title1" >
-                        <tr style="color:black;"><td><center><b>S.N.</b></center></td><td><center><b>Quiz</b></center></td><td><center><b>Question Solved</b></center></td><td><center><b>Right</b></center></td><td><center><b>Wrong<b></center></td><td><center><b>Score</b></center></td>';
-                        $c=0;
-                        while($row=mysqli_fetch_array($q) )
-                        {
-                                             
-                        $s=$row['score'];
-                        $w=$row['wrong'];
-                        $r=$row['sahi'];
-                        $qa=$row['level'];
-                        $email=$row['email'];
+                        $con = mysqli_connect("localhost", "root", "", "xm2");
+                        $sql = "DROP TABLE newtable";
+                        $querydrop = mysqli_query($con, $sql) or die('Errordroping');
+                        $sql1 = "CREATE TABLE NEWTABLE AS(SELECT quiz.title, USER.name, history.email, USER.college, history.score,RANK() OVER(PARTITION BY quiz.title ORDER BY history.score DESC) Rank FROM ( ( quiz INNER JOIN history ON quiz.eid = history.eid AND quiz.email ='$email') INNER JOIN USER ON USER.email = history.email ) ORDER BY quiz.title ASC, history.score DESC)";
+                        $querymaketable = mysqli_query($con, $sql1) or die('Errormaking');
+                        $rankselect="SELECT * from NEWTABLE";
+                        $result2 = mysqli_query($con, $rankselect) or die('ErrorSSSS');
+                        echo  '<div class="panel"><div class="table-responsive"><table class="table  table-light table-hover">
+                        <tr class="table-active">
+                        <th>Subject</th>
+                        <th>Student Name</th>
+                        <th>email</th>
+                        <th>varsity</th>
+                        <th>Marks</th>
+                        <th>Rank</th></tr>';
+                        $c = 1;
                         
-                        echo $email.$s.'<br>';
+                       
+                        while ($row = mysqli_fetch_array($result2)) {
                             
-     
+                            $title = $row['title'];
+                            $name = $row['name'];
+                            $emailuser=$row['email'];
+                            $varsity = $row['college'];
+                            $score = $row['score'];
+                            $Rank= $row['Rank'];
+                            $c = 0;
+                            echo '<tr><td><center>' . $title . '</center></td><td><center>' .$name. '</center></td><td><center>' .$emailuser. '</center></td><td><center>' .$varsity. '</center></td><td><center>' . $score . '</center></td><td><center>' . $Rank. '</center></td>
+                            </tr>';
+
+
                         }
-                }
+                       
+                    }
+                    
                     ?>
                 </div>
             </div>
