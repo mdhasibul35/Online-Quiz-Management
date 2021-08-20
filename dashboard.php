@@ -58,9 +58,7 @@ if (!(isset($_SESSION['email']))) {
                             Students
                         </a></li>
 
-                    <li class="nav-item" <?php if (@$_GET['q'] == 2) echo 'class="active"'; ?>><a class="nav-link" href="dashboard.php?q=2">
-                            Ranking
-                        </a></li>
+                  
                         <li class="nav-item" <?php if (@$_GET['q'] == 3) echo 'class="active"'; ?>><a class="nav-link" href="dashboard.php?q=3">
                             Faculty
                         </a></li>
@@ -326,7 +324,7 @@ $GLOBALS['trackrepeat']=1;
 
                         
 
-                        echo '<form method="post" action="dashboard.php?q=7"><label>Search</label><input type="text" name="search"><input type="submit" name="submit"></form>';
+                        echo '<form method="post" action="dashboard.php?q=7"><label>subject title:</label><input type="text" placeholder="Input title" name="search"><input type="submit"value="click" name="submit"></form>';
                         
 
                         echo $email;
