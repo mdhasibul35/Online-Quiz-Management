@@ -315,8 +315,19 @@ if (!(isset($_SESSION['email']))) {
                     }
                     
                     ?>
+                    <?
+                    
+
+$GLOBALS['trackrepeat']=1;
+?>
                     <?php
                     if (@$_GET['q'] == 6) {
+                        if($GLOBALS['trackrepeat']=1){
+
+                        
+
+                        echo '<form method="post" action="dashboard.php?q=7"><label>Search</label><input type="text" name="search"><input type="submit" name="submit"></form>';
+                        
 
                         echo $email;
                         $con = mysqli_connect("localhost", "root", "", "xm2");
@@ -349,12 +360,69 @@ if (!(isset($_SESSION['email']))) {
                             echo '<tr><td><center>' . $title . '</center></td><td><center>' .$name. '</center></td><td><center>' .$emailuser. '</center></td><td><center>' .$varsity. '</center></td><td><center>' . $score . '</center></td><td><center>' . $Rank. '</center></td>
                             </tr>';
 
-
                         }
+                        }
+                        
+                        echo '</table>'
+                        ?>
+
+           
+                        <?php
                        
                     }
                     
                     ?>
+
+
+
+<?php
+                         if (@$_GET['q'] == 7) {
+                        if (isset($_POST["submit"])) {
+                            $GLOBALS['trackrepeat']=0;
+                            $str = $_POST["search"];
+                            $sqlsearch="SELECT * from NEWTABLE where title='$str'";
+                            $sth = mysqli_query($con, $sqlsearch) or die('Errormaking');
+                        
+                            echo  '<div class="panel"><div class="table-responsive"><table class="table  table-light table-hover">
+                            <tr class="table-active">
+                            <th>Subject</th>
+                            <th>Student Name</th>
+                            <th>email</th>
+                            <th>varsity</th>
+                            <th>Marks</th>
+                            <th>Rank</th></tr>';
+                        
+                            while ($row = mysqli_fetch_array($sth)) {
+                                ?>
+                                
+                                <?php
+
+                            $title = $row['title'];
+                            $name = $row['name'];
+                            $emailuser=$row['email'];
+                            $varsity = $row['college'];
+                            $score = $row['score'];
+                            $Rank= $row['Rank'];
+                                echo '<tr><td><center>' . $title . '</center></td><td><center>' .$name. '</center></td><td><center>' .$emailuser. '</center></td><td><center>' .$varsity. '</center></td><td><center>' . $score . '</center></td><td><center>' . $Rank. '</center></td>
+                                </tr>';
+
+                                ?>
+                           
+                        <?php 
+                            }
+                                
+                               
+                        
+                        
+                        }
+                    }
+                        
+                        ?>
+
+
+
+
+
                 </div>
             </div>
     </section>
