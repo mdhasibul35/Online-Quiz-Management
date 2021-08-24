@@ -123,6 +123,8 @@
         countdown.innerHTML=`${min}:${seconds}`;
         time--;
         if(time<0.0){
+            
+            window.location.replace("landing-page.php");
             countdown.innerHTML=`times up`;
             exit();
 
