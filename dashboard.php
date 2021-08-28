@@ -75,6 +75,8 @@ if (!(isset($_SESSION['email']))) {
                         <li class="nav-item" <?php if (@$_GET['q'] == 6) echo 'class="active"'; ?>><a class="nav-link" href="dashboard.php?q=6">
                             ranking
                         </a></li>
+                        <li class="nav-item" align="left"><a class="nav-link" href="dashboard.php?q=8">My Profile
+                        </a></li>
 
                     <li <?php echo ''; ?>> <a class="btn btn-primary btn-outline-primary nav-link" id="logout" href="landing-page.php"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
                             Log out <i class="fas fa-sign-out-alt"></i>
