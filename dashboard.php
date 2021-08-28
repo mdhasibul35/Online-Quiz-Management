@@ -4,7 +4,7 @@ include_once 'database.php';
 
 session_start();
 if (!(isset($_SESSION['email']))) {
-    header("location:login-user.php");
+    
 } else {
     $con = mysqli_connect("localhost", "root", "", "xm2");
 
@@ -28,29 +28,29 @@ if (!(isset($_SESSION['email']))) {
     <!-- Bootstrap -->
     <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css">
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="css_old/welcome.css">
+    
     <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/sidenav.css">
+    <style>
+        body{
+            background:oldlace;
+        }
+        .navigation{
+            width:120px;
+        }
+
+
+
+
+        </style>
 </head>
 
 <body>
-
-
-    <section class="heading">
-
-        <nav class="navbar navbar-expand-lg navbar-dark">
-
-            <a class="navbar-brand" id="#brand" href="">Online Quiz System</a>
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-
-                <ul class="navbar-nav ms-auto">
+<div class="navigation">
+            <ul class="navbar-nav ms-auto">
                     <li class="nav-item" <?php if (@$_GET['q'] == 0) echo 'class="active"'; ?>>
                         <a class="nav-link" href="dashboard.php?q=0">
-                            Home
+                         <span><i class="fas fa-school"></i></span>   Home
                         </a>
                     </li>
 
@@ -60,18 +60,17 @@ if (!(isset($_SESSION['email']))) {
 
                   
                         <li class="nav-item" <?php if (@$_GET['q'] == 3) echo 'class="active"'; ?>><a class="nav-link" href="dashboard.php?q=3">
-                            Faculty
+                        <i class="fas fa-chalkboard-teacher"></i>Faculty
                         </a></li>
 
 
-                    <li class="class=" nav-item dropdown <?php if (@$_GET['q'] == 4 || @$_GET['q'] == 5) echo 'active"'; ?>">
+                    <!-- <li class="class=" nav-item dropdown <?php if (@$_GET['q'] == 4 || @$_GET['q'] == 5) echo 'active"'; ?>"> -->
 
                     <li class="nav-item"><a class="nav-link" href="dashboard.php?q=4">
                             Add Quiz
                         </a></li>
 
-                    <li class="nav-item"><a class="nav-link" href="dashboard.php?q=5">
-                            Remove Quiz
+                    <li class="nav-item" align="left"><a class="nav-link" href="dashboard.php?q=5">Remove Quiz
                         </a></li>
                         <li class="nav-item" <?php if (@$_GET['q'] == 6) echo 'class="active"'; ?>><a class="nav-link" href="dashboard.php?q=6">
                             ranking
@@ -82,9 +81,18 @@ if (!(isset($_SESSION['email']))) {
                         </a></li>
 
                 </ul>
+    </div>
+        
 
-            </div>
-        </nav>
+    <section class="heading">
+
+        
+            <a class="navbar-brand" id="#brand" href="" style="margin-right:-10%;">Online Quiz System</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
 
     </section>
 
@@ -95,8 +103,9 @@ if (!(isset($_SESSION['email']))) {
             <div class="row">
                 <div class="col-md-12">
                     <?php if (@$_GET['q'] == 0) {
-                        echo "<h1> WELCOME !!
-					</h1>";
+                    
+                    echo "<br>";
+                    echo "<h1 align='center'>$email</h1>";
                     
                     }
                     ?>
@@ -106,13 +115,13 @@ if (!(isset($_SESSION['email']))) {
                         $con = mysqli_connect("localhost", "root", "", "xm2");
                         $result = mysqli_query($con, "SELECT * FROM user") or die('Error');
                         echo  '<div class="panel"><div class="table-responsive"><table class="table table-light table-hover">
-                        <tr class="table-active"><th>S.N.</th><th>Name</th><th>College</th><th>Email</th><th>Action</th></tr>';
+                        <tr class="table-active"><th>S.N.</th><th>Name</th><th>Varsity</th><th>Email</th><th>Action</th></tr>';
                         $c = 1;
                         while ($row = mysqli_fetch_array($result)) {
                             $name = $row['name'];
                             $email = $row['email'];
                             $college = $row['college'];
-                            echo '<tr><td>' . $c++ . '</td><td>' . $name . '</td><td>' . $college . '</td><td>' . $email . '</td><td><a title="Delete User" href="update.php?demail=' . $email . '"><b><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></b></a></td></tr>';
+                            echo '<tr><td>' . $c++ . '</td><td>' . $name . '</td><td>' . $college . '</td><td>' . $email . '</td><td><a title="Delete User" href="update.php?demail=' . $email . '"><i class="far fa-trash-alt"></i></a></td></tr>';
                         }
                         $c = 0;
                         echo '</table></div></div>';
@@ -280,7 +289,7 @@ if (!(isset($_SESSION['email']))) {
                     <?php
                     if (@$_GET['q'] == 5) {
 
-                        echo $name;
+                        // echo $name;
 
                         $con = mysqli_connect("localhost", "root", "", "xm2");
                         $result = mysqli_query($con, "SELECT * FROM  quiz Where email ='$email'") or die('Error');
@@ -327,7 +336,7 @@ $GLOBALS['trackrepeat']=1;
                         echo '<form method="post" action="dashboard.php?q=7"><label>subject title:</label><input type="text" placeholder="Input title" name="search"><input type="submit"value="click" name="submit"></form>';
                         
 
-                        echo $email;
+                        echo '<br><br><br>';
                         $con = mysqli_connect("localhost", "root", "", "xm2");
                         $sql = "DROP TABLE newtable";
                         $querydrop = mysqli_query($con, $sql) or die('Errordroping');
@@ -428,6 +437,11 @@ $GLOBALS['trackrepeat']=1;
 
     <!-- Footer -->
 
+
+
+
+
+    </div>
     <footer class="white-section" id="footer">
         <div class="container-fluid">
             <i class="social-icon fab fa-facebook-f"></i>
@@ -437,10 +451,6 @@ $GLOBALS['trackrepeat']=1;
             <p>© Copyright 2021 CSE 4510</p>
         </div>
     </footer>
-
-
-
-    </div>
 
     <script src="css/bootstrap/js/bootstrap.min.js"></script>
 </body>

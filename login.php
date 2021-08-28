@@ -48,7 +48,11 @@
 		<link rel="stylesheet" href="scripts/bootstrap/bootstrap.min.css">
 		<link rel="stylesheet" href="scripts/ionicons/css/ionicons.min.css">
 		<link rel="stylesheet" href="css/form.css">
-        <style type="text/css">
+        <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" type="text/css" href="./styles.css">
+    <!-- Font Awesome icon -->
+    <script src="https://kit.fontawesome.com/e0f8b74985.js" crossorigin="anonymous"></script>
+	<style type="text/css">
             body{
                   width: 100%;
                   background: url(image/book.png) ;
@@ -57,39 +61,57 @@
                   background-attachment: fixed;
                   background-size: cover;
                 }
+				.panel{
+					margin-left:3%;
+					padding:5%;
+				    background-color:pink;
+					text-align:center;
+
+				}
           </style>
 	</head>
+	<a href="landing-page.php">
+  <button class="btn btn-outline-primary float-right first" style="margin-left: 94%;
+      margin-top: 0.5%;">Home</button></a>
 
 	<body>
-		<section class="login first grey">
-			<div class="container">
-				<div class="box-wrapper">				
-					<div class="box box-border">
-						<div class="box-body">
-						<center> <h5 style="font-family: Noto Sans;">Login to </h5><h4 style="font-family: Noto Sans;">Online Quiz System</h4></center><br>
-							<form method="post" action="login.php" enctype="multipart/form-data">
-								<div class="form-group">
-									<label>Enter Your Email Id:</label>
-									<input type="email" name="email" class="form-control">
-								</div>
-								<div class="form-group">
-									<label class="fw">Enter Your Password:
-										<a href="javascript:void(0)" class="pull-right">Forgot Password?</a>
-									</label>
-									<input type="password" name="password" class="form-control">
-								</div> 
-								<div class="form-group text-right">
-									<button class="btn btn-primary btn-block" name="submit">Login</button>
-								</div>
-								<div class="form-group text-center">
-									<span class="text-muted">Don't have an account?</span> <a href="register.php">Register</a> Here..
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+		<section>
+			<span class="panel">
+			<h1> Student <br>Panel</h1>
+			</span>
+    <div class="container">
+		
+
+      <div class="user signinbox">
+        <div class="imgBx">
+          <img src="./signin.jpeg" alt="signin.jpg">
+        </div>
+        <div class="formBx">
+          <form method="post" action="login.php" enctype="multipart/form-data">
+            <h1>Sign in</h1>
+            <input type="email" name="email">
+            <input type="password" name="password"placeholder="password" class="form-control">
+            <button class="btn btn-primary btn-block" name="submit">Login</button>
+            <p class="signup">register here <a href="register.php" >register</a> </p>
+          </form>
+        </div>
+      </div>
+
+
+
+
+
+    
+  </section>
+
+  <script>
+    function toggleForm() {
+      container = document.querySelector('.container');
+      section = document.querySelector('section');
+      container.classList.toggle('active');
+      section.classList.toggle('active');
+    }
+  </script>
 
 		<script src="js/jquery.js"></script>
 		<script src="scripts/bootstrap/bootstrap.min.js"></script>

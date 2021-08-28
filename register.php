@@ -26,14 +26,14 @@
 		if((mysqli_num_rows($result))>0)	
 		{
             echo "<center><h3><script>alert('Sorry.. This email is already registered !!');</script></h3></center>";
-            header("refresh:0;url=login.php");
+            header("refresh:0;url=Entry_page.php");
         }
 		else
 		{
             $str="insert into user set name='$name',email='$email',password='$password',college='$college'";
 			if((mysqli_query($con,$str)))	
 			echo "<center><h3><script>alert('Congrats.. You have successfully registered !!');</script></h3></center>";
-			header('location: welcome.php?q=1');
+			header('location: dashboard.php?q=1');
 		}
     }
 ?>
@@ -47,6 +47,7 @@
 		<link rel="stylesheet" href="scripts/bootstrap/bootstrap.min.css">
 		<link rel="stylesheet" href="scripts/ionicons/css/ionicons.min.css">
 		<link rel="stylesheet" href="css/form.css">
+		<link rel="stylesheet" type="text/css" href="./styles1.css">
         <style type="text/css">
             body{
                   width: 100%;
@@ -56,17 +57,32 @@
                   background-attachment: fixed;
                   background-size: cover;
                 }
+				.panel{
+					margin-left:3%;
+					padding:5%;
+				    background-color:pink;
+					text-align:center;
+
+				}
           </style>
 	</head>
 
 	<body>
-		<section class="login first grey">
-			<div class="container">
-				<div class="box-wrapper">				
-					<div class="box box-border">
-						<div class="box-body">
-							<center> <h5 style="font-family: Noto Sans;">Register to </h5><h4 style="font-family: Noto Sans;">Online Quiz System</h4></center><br>
-							<form method="post" action="register.php" enctype="multipart/form-data">
+	<a href="landing-page.php">
+  <button class="btn btn-outline-primary float-right first" style="margin-left: 94%;
+      margin-top: 0.5%;">Home</button></a>
+
+<section >
+<span class="panel">
+			<h1> Student <br>Panel</h1>
+			</span>
+    <div class="container">
+      <div class="user signinBx">
+        <div class="imgBx">
+          <img src="./signup.jpg" alt="signup.jpg">
+        </div>
+        <div class="formBx">
+<form method="post" action="register.php" enctype="multipart/form-data">
                                 <div class="form-group">
 									<label>Enter Your Username:</label>
 									<input type="text" name="name" class="form-control" required />
@@ -80,7 +96,7 @@
 									<input type="password" name="password" class="form-control" required />
                                 </div>
 								<div class="form-group">
-									<label>Enter Your College Name:</label>
+									<label>Enter Your Varsity Name:</label>
 									<input type="text" name="college" class="form-control" required />
 								</div>
                                 
@@ -91,11 +107,12 @@
 									<span class="text-muted">Already have an account! </span> <a href="login.php">Login </a> Here..
 								</div>
 							</form>
-						</div>
-					</div>
-				</div>
-			</div>
+        </div>
+      </div>
+  </div>
+			
 		</section>
+
 
 		<script src="js/jquery.js"></script>
 		<script src="scripts/bootstrap/bootstrap.min.js"></script>

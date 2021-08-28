@@ -16,67 +16,83 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Welcome | Online Quiz System</title>
-    <link  rel="stylesheet" href="css/bootstrap.min.css"/>
-    <link  rel="stylesheet" href="css/bootstrap-theme.min.css"/>    
-    <link rel="stylesheet" href="css/welcome.css">
-    <link  rel="stylesheet" href="css/font.css">
-    <script src="js/jquery.js" type="text/javascript"></script>
-    <script src="js/bootstrap.min.js"  type="text/javascript"></script>
+    <!-- Font Awesome -->
+        <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css">
+        <!-- Stylesheet -->
+        <link rel="stylesheet" href="./css/welcome.css">
+        <link rel="stylesheet" href="css/sidenav.css">
+        <style>
+            #countdown{
+                background:aliceblue;
+                font-style:italic;
+                padding:2px;
+            }
+            </style>
 </head>
-<body>
-    <nav class="navbar navbar-default title1">
-        <div class="container-fluid">
-            <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        <a class="navbar-brand" href="#"><b>Online Quiz System</b></a>
-        </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-left">
-            <li <?php if(@$_GET['q']==1) echo'class="active"'; ?> ><a href="welcome.php?q=1"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Home<span class="sr-only">(current)</span></a></li>
-            <li <?php if(@$_GET['q']==2) echo'class="active"'; ?>> <a href="welcome.php?q=2"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;History</a></li>
-            <li <?php if(@$_GET['q']==3) echo'class="active"'; ?>> <a href="welcome.php?q=3"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Ranking</a></li>
-            
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-        <li <?php echo''; ?> > <a href="landing-page.php"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Log out</a></li>
-        </ul>
-        
-            
-           
-       
-        </div>
+<body>
+<p id="countdown">Finish in time ! If you want to put your mouse above this line to change tab then you can't give exam anymore </p>
+
+<div class="navigation">
+    
+<ul class="navbar-nav ms-auto">
+    <br>
+                    <li class="nav-item" <?php if(@$_GET['q']==1) echo'class="active"'; ?>>
+                        <a class="nav-link" href="welcome.php?q=1">
+                            Quiz
+                        </a>
+                    </li>
+
+                    <li class="nav-item" <?php if(@$_GET['q']==2) echo'class="active"'; ?>><a class="nav-link"
+                            href="welcome.php?q=2">
+                            History
+                        </a></li>
+
+
+                    <li class="nav-item" <?php if(@$_GET['q']==3) echo'class="active"'; ?>><a class="nav-link"
+                            href="welcome.php?q=3">
+                            Ranking
+                        </a></li>
+
+                    <li <?php echo ''; ?>> <a class="btn btn-primary btn-outline-primary nav-link" id="logout"
+                            href="landing-page.php"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                            Log out <i class="fas fa-sign-out-alt"></i>
+                        </a></li>
+
+                </ul>
     </div>
-    </nav>
-    <br><br>
+
+
     <div class="container">
+        
         <div class="row">
             <div class="col-md-12">
+            
 
-    <p id="countdown">Time Fixed !!!</p>
+<script>
+    let x=0;
+</script>
+                <!-- <p id="countdown">Time Fixed !!!</p> -->
 
-    <script>
-        let x=0;
-    </script>
+                <script>
+                    let x = 0;
+                </script>
 
                 <!-- <script src="timing.js"></script> -->
                 <?php if(@$_GET['q']==1) 
                 {
                     $con=mysqli_connect("localhost","root","","xm2");
                     $result = mysqli_query($con,"SELECT * FROM quiz ORDER BY date DESC") or die('Error');
-                    echo  '<div class="panel"><div class="table-responsive"><table class="table table-striped title1">
-                    <tr><td><center><b>S.N.</b></center></td><td><center><b>Topic</b></center></td><td><center><b>Total question</b></center></td><td><center><b>Marks</center></b></td><td><center><b>Action</b></center></td></tr>';
+                    echo  '<div class="panel"><div class="table-responsive"><table class="table table-hover">
+                    <tr class="table-active"><td><center><b>No.</b></center></td><td><center><b>Topic</b></center></td><td><center><b>Total question</b></center></td><td><center><b>Marks</center></b></td><td><center><b>Action</b></center></td></tr>';
                     $c=1;
                     while($row = mysqli_fetch_array($result)) {
                         $title = $row['title'];
@@ -86,20 +102,20 @@
                     $q12=mysqli_query($con,"SELECT score FROM history WHERE eid='$eid' AND email='$email'" )or die('Error98');
                     $rowcount=mysqli_num_rows($q12);	
                     if($rowcount == 0){
-                        echo '<tr><td><center>'.$c++.'</center></td><td><center>'.$title.'</center></td><td><center>'.$total.'</center></td><td><center>'.$sahi*$total.'</center></td><td><center><b><a href="welcome.php?q=quiz&step=2&eid='.$eid.'&n=1&t='.$total.'" class="btn sub1" style="color:black;margin:0px;background:#1de9b6"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;<span class="title1"><b><button>Start</button onclick="return  x=1;"></b></span></a></b></center></td></tr>';
+                        echo '<tr><td><center>'.$c++.'</center></td><td><center>'.$title.'</center></td><td><center>'.$total.'</center></td><td><center>'.$sahi*$total.'</center></td><td><a href="welcome.php?q=quiz&step=2&eid='.$eid.'&n=1&t='.$total.'"><button class="btn btn-sm btn-outline-primary" >  Start  </button onclick="return  x=1;"></a></td></tr>';
                        
                     }
 
                     else
                     {
-                    echo '<tr style="color:#99cc32"><td><center>'.$c++.'</center></td><td><center>'.$title.'&nbsp;<span title="This quiz is already solve by you" class="glyphicon glyphicon-ok" aria-hidden="true"></span></center></td><td><center>'.$total.'</center></td><td><center>'.$sahi*$total.'</center></td><td><center><b><a href="#"><span class="" aria-hidden="true"></span>&nbsp;<span class="title1"><b>Completed</b></span></a></b></center></td></tr>';
+                    echo '<tr><td><center>'.$c++.'</center></td><td><center>'.$title.'&nbsp;<span title="This quiz is already solve by you" class="glyphicon glyphicon-ok" aria-hidden="true"></span></center></td><td><center>'.$total.'</center></td><td><center>'.$sahi*$total.'</center></td><td><center><b><a href="#"><span class="" aria-hidden="true"></span>&nbsp;<span class="title1"><b>Completed</b></span></a></b></center></td></tr>';
                     }
                     }
                     $c=0;
                     echo '</table></div></div>';
                 }?>
-    
-   
+
+
 
 
                 <?php
@@ -109,32 +125,33 @@
                         
                         ?>
 
-                   <script>
-     if(x==0){
-    const startingMinutes=0.10;
-    let time=startingMinutes*60;
-    const countdown=document.getElementById('countdown');
+                <script>
+                    if (x == 0) {
+                        const startingMinutes = 0.20;
+                        let time = startingMinutes * 60;
+                        const countdown = document.getElementById('countdown');
 
-    setInterval(updateCountdown,1000);
-    function updateCountdown(){
-        const min=Math.floor(time/60);
-        let seconds=time%60;
-        seconds=seconds< 10? '0' +seconds :seconds;
-        countdown.innerHTML=`${min}:${seconds}`;
-        time--;
-        if(time<0.0){
-            
-            window.location.replace("landing-page.php");
-            countdown.innerHTML=`times up`;
-            exit();
+                        setInterval(updateCountdown, 1000);
 
-        }
-    }
-}
-    </script>
+                        function updateCountdown() {
+                            const min = Math.floor(time / 60);
+                            let seconds = time % 60;
+                            seconds = seconds < 10 ? '0' + seconds : seconds;
+                            countdown.innerHTML = `${min}:${seconds}`;
+                            time--;
+                            if (time < 0.0) {
 
-  
-<?php
+                                window.location.replace("landing-page.php");
+                                countdown.innerHTML = `times up`;
+                                exit();
+
+                            }
+                        }
+                    }
+                </script>
+
+
+                <?php
                         $eid=@$_GET['eid'];
                         $sn=@$_GET['n'];
                         $total=@$_GET['t'];
@@ -186,16 +203,16 @@
                         echo '</table></div>';
                     }
                 ?>
-<!-- damn!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+                <!-- damn!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
                 <?php
                     if(@$_GET['q']== 2) 
                     {
-                        echo $email;
+                        echo"<h1 align='center'><u>All Exam history</u></h1><br>"; 
                         $con=mysqli_connect("localhost","root","","xm2");
                         $q=mysqli_query($con,"SELECT * FROM history WHERE email='$email' ORDER BY date DESC " )or die('Error197');
                         echo  '<div class="panel title">
-                        <table class="table table-striped title1" >
-                        <tr style="color:black;"><td><center><b>S.N.</b></center></td><td><center><b>Quiz</b></center></td><td><center><b>Question Solved</b></center></td><td><center><b>Right</b></center></td><td><center><b>Wrong<b></center></td><td><center><b>Score</b></center></td>';
+                        <table class="table table-hover title1" >
+                        <tr class="table-active"><td><center><b>No.</b></center></td><td><center><b>Quiz</b></center></td><td><center><b>Total Questions</b></center></td><td><center><b>Right</b></center></td><td><center><b>Wrong<b></center></td><td><center><b>Score</b></center></td>';
                         $c=0;
                         while($row=mysqli_fetch_array($q) )
                         {
@@ -216,11 +233,12 @@
 
                     if(@$_GET['q']== 3) 
                     {
+                        echo"<h1 align='center'><u>Overall Ranking based on total marks</u></h1><br>";
                         $con=mysqli_connect("localhost","root","","xm2");
                         $q=mysqli_query($con,"SELECT * FROM rank ORDER BY score DESC " )or die('Error223');
                         echo  '<div class="panel title"><div class="table-responsive">
-                        <table class="table table-striped title1" >
-                        <tr style="color:red"><td><center><b>Rank</b></center></td><td><center><b>Name</b></center></td><td><center><b>Email</b></center></td><td><center><b>Score</b></center></td></tr>';
+                        <table class="table table-hover" >
+                        <tr class="table-active"><td><center><b>Rank</b></center></td><td><center><b>Name</b></center></td><td><center><b>Email</b></center></td><td><center><b>Score</b></center></td></tr>';
                         $c=0;
 
                         while($row=mysqli_fetch_array($q) )
@@ -238,5 +256,25 @@
                         echo '</table></div></div>';
                     }
                 ?>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+
+    <footer class="white-section" id="footer">
+        <div class="container-fluid">
+            <i class="social-icon fab fa-facebook-f"></i>
+            <i class="social-icon fab fa-twitter"></i>
+            <i class="social-icon fab fa-instagram"></i>
+            <i class="social-icon fas fa-envelope"></i>
+            <p>© Copyright 2021 CSE 4510</p>
+        </div>
+    </footer>
+
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
 </body>
+
 </html>

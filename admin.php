@@ -51,15 +51,16 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<title>Admin Login | Online Quiz System</title>
+		<title>Teacher Login | Online Quiz System</title>
 		<link rel="stylesheet" href="scripts/bootstrap/bootstrap.min.css">
 		<link rel="stylesheet" href="scripts/ionicons/css/ionicons.min.css">
 		<link rel="stylesheet" href="css/form.css">
     <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" type="text/css" href="./styles.css">
     <!-- Font Awesome icon -->
     <script src="https://kit.fontawesome.com/e0f8b74985.js" crossorigin="anonymous"></script>
-        <style type="text/css">
-            body{
+      <style>
+         body{
                   width: 100%;
                   background: url(image/book.png) ;
                   background-position: center center;
@@ -67,11 +68,69 @@
                   background-attachment: fixed;
                   background-size: cover;
                 }
-          </style>
+        				.panel{
+					margin-left:3%;
+					padding:5%;
+				    background-color:pink;
+					text-align:center;
+
+				}
+        </style>
 	</head>
 
 	<body>
-		<section class="login first grey">
+  <a href="landing-page.php">
+  <button class="btn btn-outline-primary float-right first" style="margin-left: 94%;
+      margin-top: 0.5%;">Home</button></a>
+
+		<section>
+    <span class="panel">
+			<h1> Teacher <br>Panel</h1>
+			</span>
+
+    <div class="container">
+   
+
+      <div class="user signinbox">
+        <div class="imgBx">
+          <img src="./signin.jpeg" alt="signin.jpg">
+        </div>
+        <div class="formBx">
+          <form method="post" action="admin.php" enctype="multipart/form-data">
+            <h1>Sign in</h1>
+            <input type="email" name="email">
+            <input type="password" name="password"placeholder="password" class="form-control">
+            <button class="btn btn-primary btn-block" name="submit">Login</button>
+            <p class="signup">register here <a href="registerteacher.php" >register</a> </p>
+          </form>
+        </div>
+      </div>
+
+
+
+
+
+    
+  </section>
+
+  <script>
+    function toggleForm() {
+      container = document.querySelector('.container');
+      section = document.querySelector('section');
+      container.classList.toggle('active');
+      section.classList.toggle('active');
+    }
+  </script>
+		
+
+
+
+		<script src="js/jquery.js"></script>
+		<script src="scripts/bootstrap/bootstrap.min.js"></script>
+	</body>
+</html>
+
+<!-- <section class="login first grey">
 			<div class="container">
 				<div class="box-wrapper">
 					<div class="box box-border">
@@ -99,24 +158,4 @@
 					</div>
 				</div>
 			</div>
-		</section>
-
-
-    <footer id="footer">
-
-      <div>
-        <i class="fab fa-twitter fa-2x footer-icons"></i>
-        <i class="fab fa-facebook-f fa-2x footer-icons"></i>
-        <i class="fab fa-instagram fa-2x footer-icons"></i>
-        <i class="fas fa-envelope fa-2x footer-icons"></i>
-      </div>
-
-
-      <p>© Copyright 2018 TinDog</p>
-
-    </footer>
-
-		<script src="js/jquery.js"></script>
-		<script src="scripts/bootstrap/bootstrap.min.js"></script>
-	</body>
-</html>
+		</section> -->
