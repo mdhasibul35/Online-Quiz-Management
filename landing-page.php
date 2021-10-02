@@ -36,10 +36,11 @@
         <h2>Arrange</h2>
         <h1>Participate</h1>
         <h3>Get Result</h3>
-        <p> Everythong is just one click away</p>
-        <button type="button" class="btn btn-dark btn-md download-button">Take Quiz</button>
-        <button type="button" class="btn btn-primary btn-md download-button">Participate</button>
-        <button type="button" class="btn btn-light btn-md download-button">Get Result</button>
+        <p> Everything is just one click away</p>
+        <a href="admin.php">
+        <button type="button"  class="btn btn-dark btn-md download-button">Take Quiz</button></a>
+        <a href="login.php"><button type="button" class="btn btn-primary btn-md download-button">Participate</button></a>
+        <a href="login.php"> <button type="button" class="btn btn-light btn-md download-button">Get Result</button></a>
       </div>
 
       <div class="col">

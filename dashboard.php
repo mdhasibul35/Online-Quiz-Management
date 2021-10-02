@@ -59,10 +59,10 @@ if (!(isset($_SESSION['email']))) {
                         </a></li>
 
                   
-                        <li class="nav-item" <?php if (@$_GET['q'] == 3) echo 'class="active"'; ?>><a class="nav-link" href="dashboard.php?q=3">
+                        <!-- <li class="nav-item" <?php if (@$_GET['q'] == 3) echo 'class="active"'; ?>><a class="nav-link" href="dashboard.php?q=3">
                         <i class="fas fa-chalkboard-teacher"></i>Faculty
                         </a></li>
-
+ -->
 
                     <!-- <li class="class=" nav-item dropdown <?php if (@$_GET['q'] == 4 || @$_GET['q'] == 5) echo 'active"'; ?>"> -->
 
@@ -72,7 +72,7 @@ if (!(isset($_SESSION['email']))) {
 
                     <li class="nav-item" align="left"><a class="nav-link" href="dashboard.php?q=5">Remove Quiz
                         </a></li>
-                        <li class="nav-item" <?php if (@$_GET['q'] == 6) echo 'class="active"'; ?>><a class="nav-link" href="dashboard.php?q=6">
+                        <li class="nav-item" <?php if (@$_GET['q'] == 7) echo 'class="active"'; ?>><a class="nav-link" href="dashboard.php?q=7">
                             ranking
                         </a></li>
                         <li class="nav-item" align="left"><a class="nav-link" href="dashboard.php?q=8">My Profile
@@ -117,13 +117,13 @@ if (!(isset($_SESSION['email']))) {
                         $con = mysqli_connect("localhost", "root", "", "xm2");
                         $result = mysqli_query($con, "SELECT * FROM user") or die('Error');
                         echo  '<div class="panel"><div class="table-responsive"><table class="table table-light table-hover">
-                        <tr class="table-active"><th>S.N.</th><th>Name</th><th>Varsity</th><th>Email</th><th>Action</th></tr>';
+                        <tr class="table-active"><th>S.N.</th><th>Name</th><th>Varsity</th><th>Email</th></tr>';
                         $c = 1;
                         while ($row = mysqli_fetch_array($result)) {
                             $name = $row['name'];
                             $email = $row['email'];
                             $college = $row['college'];
-                            echo '<tr><td>' . $c++ . '</td><td>' . $name . '</td><td>' . $college . '</td><td>' . $email . '</td><td><a title="Delete User" href="update.php?demail=' . $email . '"><i class="far fa-trash-alt"></i></a></td></tr>';
+                            echo '<tr><td>' . $c++ . '</td><td>' . $name . '</td><td>' . $college . '</td><td>' . $email . '</td></tr>';
                         }
                         $c = 0;
                         echo '</table></div></div>';
@@ -131,7 +131,7 @@ if (!(isset($_SESSION['email']))) {
                     ?>
 
                     <?php
-                    if (@$_GET['q'] == 2) {
+                    if (@$_GET['q'] == 11) {
                         $con = mysqli_connect("localhost", "root", "", "xm2");
                         $q = mysqli_query($con, "SELECT * FROM rank  ORDER BY score DESC ") or die('Error223');
                         echo  '<div class="panel">
@@ -209,6 +209,12 @@ if (!(isset($_SESSION['email']))) {
                                     <label class="col-md-12 control-label" for="wrong"></label>
                                     <div class="col-md-12">
                                         <input id="wrong" name="wrong" placeholder="Enter minus marks on wrong answer without sign" class="form-control input-md" min="0" type="number">
+                                    </div>
+                                </div>
+                                  <div class="form-group">
+                                    <label class="col-md-12 control-label" for="timelimit"></label>
+                                    <div class="col-md-12">
+                                        <input id="timelimit" name="timelimit" placeholder="max time for each question(in seconds)" class="form-control input-md" min="0" type="float">
                                     </div>
                                 </div>
 
@@ -329,16 +335,16 @@ if (!(isset($_SESSION['email']))) {
 
 $GLOBALS['trackrepeat']=1;
 ?>
-                    <?php
-                    if (@$_GET['q'] == 6) {
+<?php
+                    if (@$_GET['q'] == 7) {
                         if($GLOBALS['trackrepeat']=1){
 
                         
 
-                        echo '<form method="post" action="dashboard.php?q=7"><label>subject title:</label><input type="text" placeholder="Input title" name="search"><input type="submit"value="click" name="submit"></form>';
+                        echo '<form method="post" action="dashboard.php?q=10"><label>subject title:</label><input type="text" placeholder="Input title" name="search"><input type="submit"value="click" name="submit"></form>';
                         
 
-                        echo '<br><br><br>';
+                       
                         $con = mysqli_connect("localhost", "root", "", "xm2");
                         $sql = "DROP TABLE newtable";
                         $querydrop = mysqli_query($con, $sql) or die('Errordroping');
@@ -346,7 +352,7 @@ $GLOBALS['trackrepeat']=1;
                         $querymaketable = mysqli_query($con, $sql1) or die('Errormaking');
                         $rankselect="SELECT * from NEWTABLE";
                         $result2 = mysqli_query($con, $rankselect) or die('ErrorSSSS');
-                        echo  '<div class="panel"><div class="table-responsive"><table class="table  table-light table-hover">
+                        echo  '<br><br><hr><div class="panel"><div class="table-responsive"><table class="table  table-light table-hover">
                         <tr class="table-active">
                         <th>Subject</th>
                         <th>Student Name</th>
@@ -383,9 +389,8 @@ $GLOBALS['trackrepeat']=1;
                     ?>
 
 
-
 <?php
-                         if (@$_GET['q'] == 7) {
+                         if (@$_GET['q'] == 10) {
                         if (isset($_POST["submit"])) {
                             $GLOBALS['trackrepeat']=0;
                             $str = $_POST["search"];

@@ -15,7 +15,22 @@
       $result = mysqli_query($con,"DELETE FROM user WHERE email='$demail' ") or die('Error');
       header("location:dashboard.php?q=1");
     }
-  }
+    else if(@$_GET['demails']) 
+    {
+      $demails=@$_GET['demails'];
+      $r1 = mysqli_query($con,"DELETE FROM admin WHERE email='$demails' ") or die('Error');
+      $r2 = mysqli_query($con,"DELETE FROM quiz WHERE email='$demails' ") or die('Error');
+      header("location:superdashboard.php?q=3");
+    }
+    else if(@$_GET['demailsstud']) 
+    {
+      $demailsstud=@$_GET['demailsstud'];
+       $r1 = mysqli_query($con,"DELETE FROM rank WHERE email='$demailsstud' ") or die('Error');
+      $r2 = mysqli_query($con,"DELETE FROM history WHERE email='$demailsstud' ") or die('Error');
+      $result = mysqli_query($con,"DELETE FROM user WHERE email='$demailsstud' ") or die('Error');
+      header("location:superdashboard.php?q=1");
+    }
+}
 
   if(isset($_SESSION['key']))
   {
@@ -36,6 +51,22 @@
       $r4 = mysqli_query($con,"DELETE FROM history WHERE eid='$eid' ") or die('Error');
       header("location:dashboard.php?q=5");
     }
+    else if(@$_GET['q']== 'rmquizs') 
+    {
+
+      $eid=@$_GET['eid'];
+      $result = mysqli_query($con,"SELECT * FROM questions WHERE eid='$eid' ") or die('Error');
+      while($row = mysqli_fetch_array($result)) 
+      {
+        $qid = $row['qid'];
+        $r1 = mysqli_query($con,"DELETE FROM options WHERE qid='$qid'") or die('Error');
+        $r2 = mysqli_query($con,"DELETE FROM answer WHERE qid='$qid' ") or die('Error');
+      }
+      $r3 = mysqli_query($con,"DELETE FROM questions WHERE eid='$eid' ") or die('Error');
+      $r4 = mysqli_query($con,"DELETE FROM quiz WHERE eid='$eid' ") or die('Error');
+      //$r4 = mysqli_query($con,"DELETE FROM history WHERE eid='$eid' ") or die('Error');
+      header("location:superdashboard.php?q=5");
+    }
   }
 
   if(isset($_SESSION['key']))
@@ -53,9 +84,10 @@
       $total = $_POST['total'];
       $sahi = $_POST['right'];
       $wrong = $_POST['wrong'];
+      $timelimit=$_POST['timelimit'];
       $id=uniqid();
-      $q3=mysqli_query($con,"INSERT INTO quiz VALUES  ('$id','$name' , '$sahi' , '$wrong','$total', NOW(),'$email')");
-      header("location:dashboard.php?q=4&step=2&eid=$id&n=$total");
+      $q3=mysqli_query($con,"INSERT INTO quiz VALUES  ('$id','$name' , '$sahi' , '$wrong','$total', NOW(),'$email','$timelimit')");
+      header("location:dashboard.php?q=4&step=2&eid=$id&n=$total&timelimit=$timelimit");
     }
   }
 
@@ -107,6 +139,7 @@ $con=mysqli_connect("localhost","root","","xm2");
     $total=@$_GET['t'];
     $ans=$_POST['ans'];
     $qid=@$_GET['qid'];
+    $timelimit=@$_GET['timelimit'];
     $q=mysqli_query($con,"SELECT * FROM answer WHERE qid='$qid' " );
     while($row=mysqli_fetch_array($q) )
     {  $ansid=$row['ansid']; }
@@ -155,7 +188,7 @@ $con=mysqli_connect("localhost","root","","xm2");
     if($sn != $total)
     {
       $sn++;
-      header("location:welcome.php?q=quiz&step=2&eid=$eid&n=$sn&t=$total")or die('Error152');
+      header("location:welcome.php?q=quiz&step=2&eid=$eid&n=$sn&t=$total&timelimit=$timelimit")or die('Error152');
     }
     else if( $_SESSION['key']!='suryapinky')
     {
@@ -206,7 +239,7 @@ $con=mysqli_connect("localhost","root","","xm2");
     }
     $sun=$sun-$s;
     $q=mysqli_query($con,"UPDATE `rank` SET `score`=$sun ,time=NOW() WHERE email= '$email'")or die('Error174');
-    header("location:welcome.php?q=quiz&step=2&eid=$eid&n=1&t=$t");
+    header("location:welcome.php?q=quiz&step=2&eid=$eid&n=1&t=$t&timelimit=$timelimit");
   }
 ?>
 

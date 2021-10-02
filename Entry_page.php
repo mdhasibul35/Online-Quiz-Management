@@ -63,6 +63,16 @@
 							</div>
 						</div>
 
+						<div class="col-sm-6">
+							<div class="card">
+								<img src="image/teacher.png" class="card-img-top" alt="...">
+								<div class="card-body">
+									<a href="superadmin.php" class="btn btn-md btn-primary">Maintenance</a>
+								</div>
+							</div>
+						</div>
+
+
 
 					</div>
 

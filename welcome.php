@@ -1,6 +1,8 @@
 <?php
+
     include_once 'database.php';
     session_start();
+    $count=0;
     if(!(isset($_SESSION['email'])))
     {
         header("location:login.php");
@@ -9,6 +11,9 @@
     {
         $name = $_SESSION['name'];
         $email = $_SESSION['email'];
+        if($count==0){
+        $timevalue=@$_GET['timelimit'];
+    }
         include_once 'database.php';
         
     }
@@ -39,7 +44,7 @@
 </head>
 
 <body>
-<p id="countdown">Finish in time ! If you want to put your mouse above this line to change tab then you can't give exam anymore </p>
+<p id="countdown">Finish in time ! If you want to put your mouse above this line to change tab then you can't give exam anymore. </p>
 
 <div class="navigation">
     
@@ -80,6 +85,28 @@
 <script>
     let x=0;
 </script>
+<script>
+let screenLog = document.querySelector('#countdown');
+document.addEventListener('mousemove', logKey);
+
+function logKey(e) {
+
+    var y1=`${e.clientY}`;
+//    var x1=`${e.screenX}`;
+    if(y1<10){
+    location.replace("Entry_page.php");
+}
+    // var w = window.innerWidth;
+    // var h = window.innerHeight;
+    // if(w<1390){
+    //     location.replace("Entry_page.php");
+    // }
+
+
+
+
+}
+</script>
                 <!-- <p id="countdown">Time Fixed !!!</p> -->
 
                 <script>
@@ -99,10 +126,11 @@
                         $total = $row['total'];
                         $sahi = $row['sahi'];
                         $eid = $row['eid'];
+                        $timelimit = $row['timelimit'];
                     $q12=mysqli_query($con,"SELECT score FROM history WHERE eid='$eid' AND email='$email'" )or die('Error98');
                     $rowcount=mysqli_num_rows($q12);	
                     if($rowcount == 0){
-                        echo '<tr><td><center>'.$c++.'</center></td><td><center>'.$title.'</center></td><td><center>'.$total.'</center></td><td><center>'.$sahi*$total.'</center></td><td><a href="welcome.php?q=quiz&step=2&eid='.$eid.'&n=1&t='.$total.'"><button class="btn btn-sm btn-outline-primary" >  Start  </button onclick="return  x=1;"></a></td></tr>';
+                        echo '<tr><td><center>'.$c++.'</center></td><td><center>'.$title.'</center></td><td><center>'.$total.'</center></td><td><center>'.$sahi*$total.'</center></td><td><a href="welcome.php?q=quiz&step=2&eid='.$eid.'&n=1&t='.$total.'&timelimit='.$timelimit.'"><button class="btn btn-sm btn-outline-primary" >  Start  </button onclick="return  x=1;"></a></td></tr>';
                        
                     }
 
@@ -122,13 +150,75 @@
                     $con=mysqli_connect("localhost","root","","xm2");
                     if(@$_GET['q']== 'quiz' && @$_GET['step']== 2) 
                     {
+                        $count++;
+
+    $eid=@$_GET['eid'];
+    $sn=@$_GET['n'];
+    $total=@$_GET['t'];
+    
+    $qid=@$_GET['qid'];
+    $timelimit=@$_GET['timelimit'];
+
+                        
+                        echo $timevalue;
                         
                         ?>
 
+                        <?php 
+                        if($timevalue==20){
+                         ?>
+                        <script>
+                        let y=20   
+                        </script>
+                    <?php
+                     } else if($timevalue==90){
+                    ?>
+                     <script>
+                        let y=90  
+                        </script>
+                    <?php
+                     }else if($timevalue==60){
+                    ?>
+                     <script>
+                        let y=60  
+                        </script>
+                    <?php
+                     }else if($timevalue==45){
+                    ?>
+                     <script>
+                        let y=45  
+                        </script>
+                    <?php
+                     }else if($timevalue==30){
+                    ?>
+                     <script>
+                        let y=30  
+                        </script>
+                    <?php
+                     }
+                     else{
+                    ?>
+                     <script>
+                        let y=40  
+                        </script>
+                    <?php
+                     }
+                    ?>
+                    <?php
+
+
+
+
+
+
+
+                    ?>
+
+
                 <script>
                     if (x == 0) {
-                        const startingMinutes = 0.20;
-                        let time = startingMinutes * 60;
+                        const startingMinutes =y;
+                        let time = startingMinutes;
                         const countdown = document.getElementById('countdown');
 
                         setInterval(updateCountdown, 1000);
@@ -141,7 +231,10 @@
                             time--;
                             if (time < 0.0) {
 
-                                window.location.replace("landing-page.php");
+
+
+                         
+                                window.location.replace("welcome.php?q=1");
                                 countdown.innerHTML = `times up`;
                                 exit();
 
@@ -164,7 +257,7 @@
                             echo '<b>Question &nbsp;'.$sn.'&nbsp;::<br /><br />'.$qns.'</b><br /><br />';
                         }
                         $q=mysqli_query($con,"SELECT * FROM options WHERE qid='$qid' " );
-                        echo '<form action="update.php?q=quiz&step=2&eid='.$eid.'&n='.$sn.'&t='.$total.'&qid='.$qid.'" method="POST"  class="form-horizontal">
+                        echo '<form action="update.php?q=quiz&step=2&eid='.$eid.'&n='.$sn.'&t='.$total.'&qid='.$qid.'&timelimit='.$timevalue.'" method="POST"  class="form-horizontal">
                         <br />';
 
                         while($row=mysqli_fetch_array($q) )
@@ -221,10 +314,13 @@
                         $w=$row['wrong'];
                         $r=$row['sahi'];
                         $qa=$row['level'];
+
                         $q23=mysqli_query($con,"SELECT title FROM quiz WHERE  eid='$eid' " )or die('Error208');
 
                         while($row=mysqli_fetch_array($q23) )
-                        {  $title=$row['title'];  }
+                        {  
+                            $title=$row['title']; 
+                        }
                         $c++;
                         echo '<tr><td><center>'.$c.'</center></td><td><center>'.$title.'</center></td><td><center>'.$qa.'</center></td><td><center>'.$r.'</center></td><td><center>'.$w.'</center></td><td><center>'.$s.'</center></td></tr>';
                         }

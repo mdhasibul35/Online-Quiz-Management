@@ -33,7 +33,7 @@
             $str="insert into user set name='$name',email='$email',password='$password',college='$college'";
 			if((mysqli_query($con,$str)))	
 			echo "<center><h3><script>alert('Congrats.. You have successfully registered !!');</script></h3></center>";
-			header('location: dashboard.php?q=1');
+			header('location: welcome.php?q=0');
 		}
     }
 ?>
