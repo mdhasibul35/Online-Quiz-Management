@@ -1,3 +1,19 @@
+<?php
+include_once 'database.php';
+
+
+session_start();
+if (!(isset($_SESSION['email']))) {
+    
+} else {
+    $con = mysqli_connect("localhost", "root", "", "xm2");
+
+    $name = $_SESSION['name'];
+    $email = $_SESSION['email'];
+    $eid=@$_GET['eid'];
+}
+
+?>
 <!DOCTYPE html>
 <!-- Created By CodingNepal -->
 <html lang="en" dir="ltr">
@@ -258,7 +274,3 @@
         });
     </script>
 </body>
-
-
-
-        

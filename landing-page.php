@@ -37,11 +37,8 @@
         <h1>Participate</h1>
         <h3>Get Result</h3>
         <p> Everything is just one click away</p>
-<<<<<<< HEAD
-        <a href="admin.php">
-=======
         <a href="login.php">
->>>>>>> f162695... **
+
         <button type="button"  class="btn btn-dark btn-md download-button">Take Quiz</button></a>
         <a href="login.php"><button type="button" class="btn btn-primary btn-md download-button">Participate</button></a>
         <a href="login.php"> <button type="button" class="btn btn-light btn-md download-button">Get Result</button></a>

@@ -20,15 +20,15 @@
       $demails=@$_GET['demails'];
       $r1 = mysqli_query($con,"DELETE FROM teacher WHERE email='$demails' ") or die('Error');
       $r2 = mysqli_query($con,"DELETE FROM quiz WHERE email='$demails' ") or die('Error');
-      header("location:superdashboardv2.php?q=3");
+      header("location:admin-dashboard.php?q=3");
     }
     else if(@$_GET['demailsstud']) 
     {
       $demailsstud=@$_GET['demailsstud'];
-       $r1 = mysqli_query($con,"DELETE FROM rank WHERE email='$demailsstud' ") or die('Error');
+      $r1 = mysqli_query($con,"DELETE FROM rank WHERE email='$demailsstud' ") or die('Error');
       $r2 = mysqli_query($con,"DELETE FROM history WHERE email='$demailsstud' ") or die('Error');
       $result = mysqli_query($con,"DELETE FROM user WHERE email='$demailsstud' ") or die('Error');
-      header("location:superdashboardv2.php?q=1");
+      header("location:admin-dashboard.php?q=1");
     }
 }
 
@@ -64,7 +64,7 @@
       }
       $r3 = mysqli_query($con,"DELETE FROM questions WHERE eid='$eid' ") or die('Error');
       $r4 = mysqli_query($con,"DELETE FROM quiz WHERE eid='$eid' ") or die('Error');
-      //$r4 = mysqli_query($con,"DELETE FROM history WHERE eid='$eid' ") or die('Error');
+     
       header("location:superdashboardv2.php?q=5");
     }
   }
