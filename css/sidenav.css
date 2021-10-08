@@ -8,23 +8,22 @@
 /* eta  */
 body{
   min-height: 100vh;
-  background:antiquewhite;
+  background-color: oldlace;
 }
-
+/* background:antiquewhite; */
 .navigation {
   position: fixed;
-  width: 150px;
-     /* width: 300px; */
+  width: 100px;
   height: 100%;
   background: #c645dd;
   transition: 0.5s;
   overflow: hidden;
 }
-
+/* width: 300px; */
 /* eta  */
 
 .navigation:hover {
-  width: 300px;
+  width: 200px;
 }
 
 .navigation ul

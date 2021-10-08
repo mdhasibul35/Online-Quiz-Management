@@ -6,8 +6,7 @@ body {
     min-height: 100vh;
     font-family: "Montserrat";
     text-align: center;
-    background-color: #F5F5F5;
-
+    background: oldlace;
     display: flex;
     flex-direction: column;
 }
@@ -36,11 +35,6 @@ body {
 }
 
 
-
-.navbar-dark .navbar-brand, .navbar-dark .navbar-nav .nav-link {
-    color: cornflowerblue;
-}
-
 .navbar-dark .navbar-brand:hover {
     color: #364F6B ; 
 }
@@ -54,6 +48,16 @@ body {
 #logout {
     color: #F5F5F5;
 }
+
+
+/* Main Body */
+
+/* .main-body {
+    padding-top: 10%;
+} */
+
+
+
 
 
 

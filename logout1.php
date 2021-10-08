@@ -5,3 +5,5 @@ session_destroy();}
 $ref= @$_GET['q'];
 header("location:admin.php");
 ?>
+
+

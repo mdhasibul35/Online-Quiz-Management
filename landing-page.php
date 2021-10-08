@@ -23,8 +23,8 @@
         <a class="navbar-brand" href="#">Online Quiz Management System</a>
         <div class="btn-group mx-auto">
         </div>
-        <a href="Entry_page.php" class="btn btn-md btn-outline-primary ms-auto">Log in</a>
-        <a href="Entry_page.php" class="btn btn-md btn-primary" style="margin-left: 7px;" aria-current="page">Sign Up</a>
+        <a href="login.php" class="btn btn-md btn-outline-primary ms-auto">Log in</a>
+        <a href="login.php" class="btn btn-md btn-primary" style="margin-left: 7px;" aria-current="page">Sign Up</a>
         </ul>
       </nav>
     </div>
@@ -37,7 +37,11 @@
         <h1>Participate</h1>
         <h3>Get Result</h3>
         <p> Everything is just one click away</p>
+<<<<<<< HEAD
         <a href="admin.php">
+=======
+        <a href="login.php">
+>>>>>>> f162695... **
         <button type="button"  class="btn btn-dark btn-md download-button">Take Quiz</button></a>
         <a href="login.php"><button type="button" class="btn btn-primary btn-md download-button">Participate</button></a>
         <a href="login.php"> <button type="button" class="btn btn-light btn-md download-button">Get Result</button></a>
