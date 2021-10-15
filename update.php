@@ -82,11 +82,11 @@
       
       $name= ucwords(strtolower($name));
       $total = $_POST['total'];
-      $sahi = $_POST['right'];
+      $correct = $_POST['right'];
       $wrong = $_POST['wrong'];
       $timelimit=$_POST['timelimit'];
       $id=uniqid();
-      $q3=mysqli_query($con,"INSERT INTO quiz VALUES  ('$id','$name' , '$sahi' , '$wrong','$total', NOW(),'$email','$timelimit')");
+      $q3=mysqli_query($con,"INSERT INTO quiz VALUES  ('$id','$name' , '$correct' , '$wrong','$total', NOW(),'$email','$timelimit')");
       header("location:dashboardv2.php?q=4&step=2&eid=$id&n=$total&timelimit=$timelimit");
     }
   }
@@ -148,7 +148,7 @@ $con=mysqli_connect("localhost","root","","xm2");
       $q=mysqli_query($con,"SELECT * FROM quiz WHERE eid='$eid' " );
       while($row=mysqli_fetch_array($q) )
       {
-        $sahi=$row['sahi'];
+        $correct=$row['correct'];
       }
       if($sn == 1)
       {
@@ -158,11 +158,11 @@ $con=mysqli_connect("localhost","root","","xm2");
       while($row=mysqli_fetch_array($q) )
       {
         $s=$row['score'];
-        $r=$row['sahi'];
+        $r=$row['correct'];
       }
       $r++;
-      $s=$s+$sahi;
-      $q=mysqli_query($con,"UPDATE `history` SET `score`=$s,`level`=$sn,`sahi`=$r, date= NOW()  WHERE  email = '$email' AND eid = '$eid'")or die('Error124');
+      $s=$s+$correct;
+      $q=mysqli_query($con,"UPDATE `history` SET `score`=$s,`level`=$sn,`correct`=$r, date= NOW()  WHERE  email = '$email' AND eid = '$eid'")or die('Error124');
     } 
     else
     {

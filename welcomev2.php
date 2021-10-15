@@ -136,13 +136,13 @@ function logKey(e) {
          while($row = mysqli_fetch_array($result)) {
             $title = $row['title'];
             $total = $row['total'];
-            $sahi = $row['sahi'];
+            $correct = $row['correct'];
             $eid = $row['eid'];
             $timelimit = $row['timelimit'];
          $q12=mysqli_query($con,"SELECT score FROM history WHERE eid='$eid' AND email='$email'" )or die('Error98');
          $rowcount=mysqli_num_rows($q12);	
          if($rowcount == 0){
-            echo '<tr><td><center>'.$c++.'</center></td><td><center>'.$title.'</center></td><td><center>'.$total.'</center></td><td><center>'.$sahi*$total.'</center></td><td><center>'.$timelimit.'</center></td><td><a href="welcomev2.php?q=quiz&step=2&eid='.$eid.'&n=1&t='.$total.'&timelimit='.$timelimit.'"><button class="btn btn-sm btn-outline-primary" >  Start  </button onclick="return  x=1;"></a></td></tr>';
+            echo '<tr><td><center>'.$c++.'</center></td><td><center>'.$title.'</center></td><td><center>'.$total.'</center></td><td><center>'.$correct*$total.'</center></td><td><center>'.$timelimit.'</center></td><td><a href="welcomev2.php?q=quiz&step=2&eid='.$eid.'&n=1&t='.$total.'&timelimit='.$timelimit.'"><button class="btn btn-sm btn-outline-primary" >  Start  </button onclick="return  x=1;"></a></td></tr>';
             
          }
 
@@ -165,14 +165,14 @@ function logKey(e) {
          while($row = mysqli_fetch_array($result)) {
             $title = $row['title'];
             $total = $row['total'];
-            $sahi = $row['sahi'];
+            $correct = $row['correct'];
             $eid = $row['eid'];
             $timelimit = $row['timelimit'];
          $q12=mysqli_query($con,"SELECT score FROM history WHERE eid='$eid' AND email='$email'" )or die('Error98');
          $rowcount=mysqli_num_rows($q12); 
          if($rowcount != 0)
          {
-         echo '<tr><td><center>'.$c++.'</center></td><td><center>'.$title.'&nbsp;<span title="This quiz is already solve by you" class="glyphicon glyphicon-ok" aria-hidden="true"></span></center></td><td><center>'.$total.'</center></td><td><center>'.$sahi*$total.'</center></td><td><center><b><a href="#"><span class="" aria-hidden="true"></span>&nbsp;<span class="title1"><b>Completed</b></span></a></b></center></td></tr>';
+         echo '<tr><td><center>'.$c++.'</center></td><td><center>'.$title.'&nbsp;<span title="This quiz is already solve by you" class="glyphicon glyphicon-ok" aria-hidden="true"></span></center></td><td><center>'.$total.'</center></td><td><center>'.$correct*$total.'</center></td><td><center><b><a href="#"><span class="" aria-hidden="true"></span>&nbsp;<span class="title1"><b>Completed</b></span></a></b></center></td></tr>';
          }
          }
          $c=0;
@@ -200,7 +200,7 @@ function logKey(e) {
          $eid=$row['eid'];
          $s=$row['score'];
          $w=$row['wrong'];
-         $r=$row['sahi'];
+         $r=$row['correct'];
          $qa=$row['level'];
          
 
@@ -285,16 +285,16 @@ function logKey(e) {
                         let y=20   
                         </script>
                         <?php
-                        } else if($timevalue==90){
+                        } else if($timevalue==10){
                         ?>
                          <script>
-                        let y=90  
+                        let y=10  
                         </script>
                     <?php
-                     }else if($timevalue==60){
+                     }else if($timevalue==30){
                     ?>
                      <script>
-                        let y=60  
+                        let y=30  
                         </script>
                     <?php
                      }else if($timevalue==45){
@@ -303,10 +303,10 @@ function logKey(e) {
                         let y=45  
                         </script>
                     <?php
-                     }else if($timevalue==30){
+                     }else if($timevalue==60){
                     ?>
                      <script>
-                        let y=30  
+                        let y=60  
                         </script>
                     <?php
                      }
@@ -386,7 +386,7 @@ function logKey(e) {
             $sn=@$_GET['n'];
             $total=@$_GET['t'];
             $q=mysqli_query($con,"SELECT * FROM questions WHERE eid='$eid' AND sn='$sn' " );
-            echo '<div class="panel" style="margin:5%">';
+            echo '<div class="panel" style="margin:5%;padding:1%; border-style: solid;">';
             while($row=mysqli_fetch_array($q) )
             {
                   $qns=$row['qns'];
@@ -417,7 +417,7 @@ function logKey(e) {
             {
                   $s=$row['score'];
                   $w=$row['wrong'];
-                  $r=$row['sahi'];
+                  $r=$row['correct'];
                   $qa=$row['level'];
                   echo '<tr style="color:#66CCFF"><td>Total Questions</td><td>'.$qa.'</td></tr>
                      <tr style="color:#99cc32"><td>right Answer&nbsp;<span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></td><td>'.$r.'</td></tr> 

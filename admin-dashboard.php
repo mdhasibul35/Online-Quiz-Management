@@ -177,12 +177,12 @@ if (!(isset($_SESSION['email']))) {
 
                     $title = $row['title'];
                     $total = $row['total'];
-                    $sahi = $row['sahi'];
+                    $correct = $row['correct'];
                     $eid = $row['eid'];
                     $email= $row['email'];
 
                     
-                    echo '<tr><td><center>' . $c++ . '</center></td><td><center>' .$email.'</center></td><td><center>'. $title . '</center></td><td><center>' . $total . '</center></td><td><center>' . $sahi * $total . '</center></td>
+                    echo '<tr><td><center>' . $c++ . '</center></td><td><center>' .$email.'</center></td><td><center>'. $title . '</center></td><td><center>' . $total . '</center></td><td><center>' . $correct * $total . '</center></td>
                     <td><center><b><a href="update.php?q=rmquizs&eid=' . $eid . '" class="pull-right btn btn-sm btn-outline-primary"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;<span class="title1"><b>Remove</b></span></a></b></center></td></tr>';
                 }
                 $c = 0;

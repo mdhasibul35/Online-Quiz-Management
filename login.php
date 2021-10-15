@@ -29,7 +29,7 @@
             $result = mysqli_query($con,$str);
             if((mysqli_num_rows($result))!=1) 
             {
-            header("Location: login.php?error=$email.$pass.Username/Password didn't match");
+            header("Location: login.php?error=Username/Password didn't match");
             }
             else
             {
